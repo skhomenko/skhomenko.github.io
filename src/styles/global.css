@@ -50,7 +50,10 @@
     --ink-0: #f3f7f5;
     --ink-1: #c7d2cf;
     --ink-2: #91a09d;
-    --ink-3: #657471;
+    /* Lightened from #657471, which measured 3.4:1 on --surface-2 and failed
+       WCAG AA. This carries the small metadata text, so it has to clear 4.5:1
+       on the darkest surface it ever sits on. */
+    --ink-3: #7c8b88;
     --surface-0: #071014;
     --surface-1: #0b171c;
     --surface-2: #102127;
@@ -1601,17 +1604,25 @@
       border-bottom: 1px solid var(--line-strong);
       background: rgba(7, 16, 20, 0.98);
       opacity: 0;
+      /* `visibility` is what actually takes the closed menu out of the
+         accessibility tree and the tab order; opacity and pointer-events only
+         hide it from the eye and the mouse. Delayed on close so the fade still
+         plays, instant on open. */
+      visibility: hidden;
       pointer-events: none;
       transform: translateY(-1rem);
       transition:
         opacity var(--transition),
-        transform var(--transition);
+        transform var(--transition),
+        visibility 0s linear 180ms;
     }
 
     .site-nav.is-open {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
       transform: translateY(0);
+      transition-delay: 0s;
     }
 
     .site-nav__links {
@@ -1798,6 +1809,16 @@
 
     .resume-panel__actions {
       display: grid;
+    }
+  }
+
+  /* The brand cannot shrink and the motto is 42 characters wide, which
+     together put a hard floor of ~423px on the header: below that the menu
+     toggle is pushed past the right edge. Phones keep the name and lose the
+     motto. */
+  @media (max-width: 480px) {
+    .brand__motto {
+      display: none;
     }
   }
 

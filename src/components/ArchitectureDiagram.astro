@@ -37,20 +37,33 @@ const diagrams = {
     ["cite", "Source articles", "Every claim traceable"],
   ],
 } as const;
+
+/** Read out as the list's accessible name, so `type` never reaches a user. */
+const names = {
+  reporting: "Test reporting platform",
+  enterprise: "Enterprise quality engineering",
+  api: "API automation",
+  scheduling: "Booking and scheduling platform",
+  assistant: "Bilingual document assistant",
+} as const;
 ---
 
-<div
+{
+  /* An ordered list rather than role="img": the nodes are a sequence of named
+     steps, and collapsing them into a single alt string threw away every word
+     in the diagram for anyone not looking at it. */
+}
+<ol
   class="architecture-diagram"
-  role="img"
-  aria-label={`${type} architecture workflow`}
+  aria-label={`${names[type]} architecture, step by step`}
 >
   {
-    diagrams[type].map(([label, title, detail]) => (
-      <div class="architecture-diagram__node">
-        <span>{label}</span>
+    diagrams[type].map(([step, title, detail]) => (
+      <li class="architecture-diagram__node">
+        <span>{step}</span>
         <strong>{title}</strong>
         <small>{detail}</small>
-      </div>
+      </li>
     ))
   }
-</div>
+</ol>
