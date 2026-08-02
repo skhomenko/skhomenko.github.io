@@ -8,3 +8,6 @@ dist/
 
 # Local agent/editor config
 .claude/
+
+# Private CV working notes, kept outside the repo
+docs/cv-prompt.md
