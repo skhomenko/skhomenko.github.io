@@ -786,7 +786,6 @@
      the rail — being absolutely positioned — painted straight over the text. */
   .project-card__signal {
     display: grid;
-    position: relative;
     min-height: 6rem;
     align-content: center;
     margin-block: 1.75rem 1.5rem;
@@ -802,17 +801,6 @@
     align-self: center;
     background: linear-gradient(90deg, var(--mint), var(--blue), transparent);
     content: "";
-  }
-
-  .project-card__signal i {
-    position: absolute;
-    top: calc(50% - 1.5rem);
-    left: 0;
-    width: 55%;
-    height: 1px;
-    border-top: 1px dashed var(--line-strong);
-    transform: rotate(-7deg);
-    transform-origin: left;
   }
 
   /* Every item is placed explicitly: auto-placement would push the dots into
