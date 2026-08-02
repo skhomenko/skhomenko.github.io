@@ -1793,13 +1793,32 @@
     }
   }
 
-  /* The brand cannot shrink and the motto is 42 characters wide, which
-     together put a hard floor of ~423px on the header: below that the menu
-     toggle is pushed past the right edge. Phones keep the name and lose the
-     motto. */
+  /* The motto is 42 characters, so on a phone it cannot share a line with the
+     name, the mark, and the toggle: that combination put a hard floor of
+     ~423px on the header and pushed the toggle off the right edge. Rather
+     than drop the motto, let the brand shrink and the motto wrap, and give
+     the marker bar the full height of the wrapped text so it still reads as
+     a pull-quote rule rather than a stray dash. */
   @media (max-width: 480px) {
+    .site-header__inner {
+      gap: 1rem;
+    }
+
+    .brand {
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+
     .brand__motto {
-      display: none;
+      align-items: stretch;
+    }
+
+    .brand__motto::before {
+      height: auto;
+    }
+
+    .brand__motto em {
+      min-width: 0;
     }
   }
 
