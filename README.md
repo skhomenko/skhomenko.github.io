@@ -105,14 +105,18 @@ When adding a case study:
 Place the updated, privacy-safe PDF at:
 
 ```text
-public/resume/sergii-khomenko-resume.pdf
+public/resume/sergii-khomenko-software-engineer-cv.pdf
 ```
 
 The stable public URL will be:
 
 ```text
-/resume/sergii-khomenko-resume.pdf
+/resume/sergii-khomenko-software-engineer-cv.pdf
 ```
+
+This path is set by `resumePath` in `src/data/site.ts`. Overwrite the existing
+file rather than adding a new one; publishing under a different name without
+updating `resumePath` leaves the previous résumé live.
 
 Do not publish an older résumé before removing the home address, phone number,
 internal project details, and other private information.
