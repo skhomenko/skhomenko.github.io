@@ -1,0 +1,110 @@
+---
+import Icon from "../components/Icon.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { experience } from "../data/experience";
+import { profile } from "../data/profile";
+import { skillGroups } from "../data/skills";
+import { siteConfig } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Résumé | Sergii Khomenko"
+  description="Résumé overview for Sergii Khomenko, a software engineer working across quality engineering, automation architecture, and development."
+>
+  <header class="page-hero shell">
+    <div class="page-hero__grid">
+      <div>
+        <p class="eyebrow">Résumé</p>
+        <h1>Where I’ve worked and what I’ve built.</h1>
+      </div>
+      <p class="page-hero__summary">{profile.introduction}</p>
+    </div>
+  </header>
+
+  <section class="shell resume-download">
+    <div class="resume-panel">
+      <div>
+        <h2>Résumé</h2>
+        <p>
+          {
+            siteConfig.resumePath
+              ? "Roles, dates, employers, and selected projects, as a PDF."
+              : "The full role history is below. A PDF copy is available on request."
+          }
+        </p>
+      </div>
+      <div class="resume-panel__actions">
+        {
+          siteConfig.resumePath ? (
+            <>
+              <a
+                class="button"
+                href={siteConfig.resumePath}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View PDF <Icon name="external" />
+              </a>
+              <a
+                class="button button--ghost"
+                href={siteConfig.resumePath}
+                download
+              >
+                Download PDF <Icon name="download" />
+              </a>
+            </>
+          ) : (
+            <a class="button" href="/#contact">
+              Request a copy <Icon name="arrow" />
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="career" class="section shell">
+    <SectionHeading
+      eyebrow="Career"
+      title="Twenty-five years, converging on the part I like most."
+      description="Writing software, and building the systems that prove it works. Dates and employers here; the résumé above has the achievements."
+    />
+    <ol class="timeline">
+      {
+        experience.map((item) => (
+          <li class="timeline__item">
+            <span class="timeline__period">{item.period}</span>
+            <div class="timeline__body">
+              <h3>{item.role}</h3>
+              {item.org && <p class="timeline__org">{item.org}</p>}
+              <p class="timeline__focus">{item.focus}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section shell section--flush-top">
+    <SectionHeading
+      eyebrow="Core capabilities"
+      title="Software engineering, quality systems, and technical leadership."
+    />
+    <div class="toolbox-grid">
+      {
+        skillGroups.map((group) => (
+          <article class="toolbox-group">
+            <h3>{group.title}</h3>
+            <p>{group.description}</p>
+            <ul>
+              {group.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

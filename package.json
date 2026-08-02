@@ -1,0 +1,22 @@
+{
+  "name": "sergii-khomenko-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "check": "astro check",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "astro": "latest",
+    "prettier": "latest",
+    "prettier-plugin-astro": "latest",
+    "typescript": "latest"
+  }
+}

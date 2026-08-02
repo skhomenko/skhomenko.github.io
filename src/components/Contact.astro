@@ -1,0 +1,44 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/profile";
+import { siteConfig } from "../data/site";
+---
+
+<section id="contact" class="contact section shell">
+  <div class="contact__signal" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <p class="eyebrow">Let’s solve something difficult</p>
+  <h2>If any of this is useful to you, get in touch.</h2>
+  <p>{profile.availability}</p>
+  <div class="contact__actions">
+    {
+      siteConfig.email && (
+        <a class="button" href={`mailto:${siteConfig.email}`}>
+          Email Sergii <Icon name="mail" />
+        </a>
+      )
+    }
+    {
+      siteConfig.linkedin && (
+        <a
+          class="button button--ghost"
+          href={siteConfig.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn <Icon name="external" />
+        </a>
+      )
+    }
+    <a
+      class="button button--ghost"
+      href={siteConfig.github}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      GitHub <Icon name="external" />
+    </a>
+  </div>
+  <p class="contact__note">I keep contact to public professional channels.</p>
+</section>

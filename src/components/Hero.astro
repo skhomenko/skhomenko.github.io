@@ -1,0 +1,32 @@
+---
+import HeroPortrait from "./HeroPortrait.astro";
+import Icon from "./Icon.astro";
+import { portrait, profile } from "../data/profile";
+---
+
+<section class:list={["hero", "shell", !portrait && "hero--solo"]}>
+  <div class="hero__copy">
+    <p class="hero__kicker"><span></span>{profile.role}</p>
+    <h1>{profile.headline}</h1>
+    <blockquote>{profile.statement}</blockquote>
+    <p class="hero__intro">{profile.introduction}</p>
+    <div class="hero__actions">
+      <a class="button" href="#work">Explore my work <Icon name="arrow" /></a>
+      <a class="button button--ghost" href="/resume">View résumé</a>
+      <a class="text-link" href="#contact"
+        >Start a conversation <Icon name="arrow" /></a
+      >
+    </div>
+  </div>
+  {
+    portrait && (
+      <div class="hero__visual">
+        <HeroPortrait />
+      </div>
+    )
+  }
+  <div class="hero__footnote">
+    <span>Software engineering is the foundation.</span>
+    <span>Quality is the specialization.</span>
+  </div>
+</section>

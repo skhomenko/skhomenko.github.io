@@ -1,0 +1,56 @@
+---
+interface Props {
+  type: "reporting" | "enterprise" | "api" | "scheduling" | "assistant";
+}
+
+const { type } = Astro.props;
+
+const diagrams = {
+  reporting: [
+    ["ingest", "CI test runs", "Results + branch context"],
+    ["normalize", "REST service", "Stable execution model"],
+    ["persist", "PostgreSQL", "Queryable run history"],
+    ["surface", "Reports + Slack", "Actionable diagnostics"],
+  ],
+  enterprise: [
+    ["product", "Multiple surfaces", "Sanitized system boundaries"],
+    ["validate", "Automation layers", "UI + API + integration"],
+    ["execute", "Cloud infrastructure", "CI-driven feedback"],
+    ["improve", "Reliability loop", "Monitor + coach + refine"],
+  ],
+  api: [
+    ["risk", "Service behavior", "Contract + workflow analysis"],
+    ["design", "API framework", "Reusable test architecture"],
+    ["deliver", "CI integration", "Automated regression"],
+    ["decide", "Quality visibility", "Release evidence"],
+  ],
+  scheduling: [
+    ["request", "Availability window", "Provider rules + timezone"],
+    ["reserve", "Booking service", "Conflict checks at three layers"],
+    ["persist", "PostgreSQL", "Lifecycle state + audit trail"],
+    ["notify", "Reminder worker", "Bilingual mail, exactly once"],
+  ],
+  assistant: [
+    ["ingest", "Document pipeline", "Parse + chunk + embed"],
+    ["retrieve", "Vector search", "Relevant passages only"],
+    ["answer", "Local model", "Grounded in what was retrieved"],
+    ["cite", "Source articles", "Every claim traceable"],
+  ],
+} as const;
+---
+
+<div
+  class="architecture-diagram"
+  role="img"
+  aria-label={`${type} architecture workflow`}
+>
+  {
+    diagrams[type].map(([label, title, detail]) => (
+      <div class="architecture-diagram__node">
+        <span>{label}</span>
+        <strong>{title}</strong>
+        <small>{detail}</small>
+      </div>
+    ))
+  }
+</div>

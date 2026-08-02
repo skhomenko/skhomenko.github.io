@@ -1,0 +1,30 @@
+---
+import Contact from "../../components/Contact.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { projects } from "../../data/projects";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Engineering Work | Sergii Khomenko"
+  description="Case studies in automation architecture, quality engineering, developer productivity, CI transformation, and applied AI."
+>
+  <header class="page-hero shell">
+    <div class="page-hero__grid">
+      <div>
+        <p class="eyebrow">Selected engineering work</p>
+        <h1>Four systems, and the thinking behind them.</h1>
+      </div>
+      <p class="page-hero__summary">
+        A closer look at how I frame a problem, what I decided along the way,
+        and what the result gave back to the engineers using it.
+      </p>
+    </div>
+  </header>
+  <section class="shell section section--flush-top">
+    <div class="project-grid">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+  <Contact />
+</BaseLayout>

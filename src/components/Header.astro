@@ -1,0 +1,163 @@
+---
+import Icon from "./Icon.astro";
+import { navigation, siteConfig } from "../data/site";
+
+const pathname = Astro.url.pathname;
+---
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header" data-header>
+  <div class="site-header__inner shell">
+    <a class="brand" href="/" aria-label="Sergii Khomenko, home">
+      <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="brand__text">
+        <strong>{siteConfig.name}</strong>
+        <span class="brand__motto"><em>{siteConfig.motto}</em></span>
+      </span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+      data-menu-toggle
+    >
+      <span class="sr-only">Open navigation</span>
+      <span></span><span></span>
+    </button>
+
+    <nav
+      id="site-navigation"
+      class="site-nav"
+      aria-label="Primary"
+      data-navigation
+    >
+      <div class="site-nav__links">
+        {
+          navigation.map((item) => (
+            <a
+              href={item.href}
+              data-spy={item.spy ?? undefined}
+              aria-current={
+                item.href !== "/#expertise" && pathname.startsWith(item.href)
+                  ? "page"
+                  : undefined
+              }
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+      <div class="site-nav__actions">
+        <a
+          class="icon-link"
+          href={siteConfig.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile, opens in a new tab"
+        >
+          <Icon name="github" />
+        </a>
+        {
+          siteConfig.linkedin && (
+            <a
+              class="icon-link"
+              href={siteConfig.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile, opens in a new tab"
+            >
+              <Icon name="linkedin" />
+            </a>
+          )
+        }
+        <a class="button button--small button--ghost" href="/resume">Résumé</a>
+        <a class="button button--small" href="/#contact" data-spy="contact"
+          >Contact</a
+        >
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle =
+    document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const navigation = document.querySelector<HTMLElement>("[data-navigation]");
+
+  const closeMenu = () => {
+    toggle?.setAttribute("aria-expanded", "false");
+    navigation?.classList.remove("is-open");
+    document.body.classList.remove("menu-open");
+  };
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    navigation?.classList.toggle("is-open", !isOpen);
+    document.body.classList.toggle("menu-open", !isOpen);
+  });
+
+  navigation
+    ?.querySelectorAll("a")
+    .forEach((link) => link.addEventListener("click", closeMenu));
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+      toggle?.focus();
+    }
+  });
+
+  /* --- Scroll spy -------------------------------------------------------
+     Highlights the nav link for the section currently under the header.
+     Tracked sections only exist on the home page; elsewhere this is a no-op.
+     We keep the last passed section lit while scrolling through untracked
+     ones (applied AI, toolbox) so the indicator never blinks out
+     mid-page. */
+  const spied = [
+    ...(navigation?.querySelectorAll<HTMLAnchorElement>("[data-spy]") ?? []),
+  ]
+    .map((link) => ({
+      link,
+      section: document.getElementById(link.dataset.spy!),
+    }))
+    .filter(
+      (entry): entry is { link: HTMLAnchorElement; section: HTMLElement } =>
+        entry.section !== null,
+    );
+
+  if (spied.length) {
+    const header = document.querySelector<HTMLElement>("[data-header]");
+    let active: HTMLAnchorElement | null = null;
+    let queued = false;
+
+    const sync = () => {
+      queued = false;
+      // A section counts as current once its top passes just below the header.
+      const line = (header?.offsetHeight ?? 0) + 24;
+      let next: HTMLAnchorElement | null = null;
+      for (const { link, section } of spied) {
+        if (section.getBoundingClientRect().top <= line) next = link;
+      }
+      if (next === active) return;
+      active?.classList.remove("is-current");
+      active?.removeAttribute("aria-current");
+      next?.classList.add("is-current");
+      next?.setAttribute("aria-current", "location");
+      active = next;
+    };
+
+    const schedule = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(sync);
+    };
+
+    addEventListener("scroll", schedule, { passive: true });
+    addEventListener("resize", schedule, { passive: true });
+    sync();
+  }
+</script>

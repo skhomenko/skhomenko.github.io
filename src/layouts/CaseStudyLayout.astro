@@ -1,0 +1,82 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import ArchitectureDiagram from "../components/ArchitectureDiagram.astro";
+import Icon from "../components/Icon.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  entry: CollectionEntry<"work">;
+  next?: CollectionEntry<"work">;
+}
+
+const { entry, next } = Astro.props;
+const { Content } = await render(entry);
+const title = `${entry.data.title} | Sergii Khomenko`;
+---
+
+<BaseLayout title={title} description={entry.data.description} type="article">
+  <nav class="breadcrumb shell" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/work">Work</a></li>
+      <li aria-current="page">{entry.data.title}</li>
+    </ol>
+  </nav>
+
+  <header class="page-hero shell">
+    <div class="page-hero__grid">
+      <div>
+        <p class="eyebrow">{entry.data.eyebrow}</p>
+        <h1>{entry.data.title}</h1>
+      </div>
+      <p class="page-hero__summary">{entry.data.summary}</p>
+    </div>
+  </header>
+
+  <section class="shell">
+    <dl class="case-meta">
+      <div>
+        <dt>Status</dt>
+        <dd>{entry.data.status}</dd>
+      </div>
+      <div>
+        <dt>My role</dt>
+        <dd>{entry.data.role}</dd>
+      </div>
+      <div>
+        <dt>Collaboration</dt>
+        <dd>{entry.data.collaboration}</dd>
+      </div>
+      <div>
+        <dt>Technologies</dt>
+        <dd>{entry.data.technologies.join(" · ")}</dd>
+      </div>
+    </dl>
+    <ArchitectureDiagram type={entry.data.diagram} />
+  </section>
+
+  <section class="case-content shell">
+    <aside class="case-content__aside">
+      <p class="eyebrow">Engineering record</p>
+      <p>
+        Scope, ownership, collaboration, and future ideas are separated to keep
+        this account accurate.
+      </p>
+    </aside>
+    <article class="prose">
+      <Content />
+    </article>
+  </section>
+
+  {
+    next && (
+      <aside class="case-next shell">
+        <p class="eyebrow">Next case study</p>
+        <a href={`/work/${next.id}`}>
+          <h3>{next.data.title}</h3>
+          <Icon name="arrow" />
+        </a>
+      </aside>
+    )
+  }
+</BaseLayout>
