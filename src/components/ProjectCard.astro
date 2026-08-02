@@ -1,0 +1,35 @@
+---
+import type { Project } from "../data/projects";
+import Icon from "./Icon.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-card">
+  <a
+    href={`/work/${project.slug}`}
+    class="project-card__link"
+    aria-label={`Read ${project.title}`}
+  >
+    <div class="project-card__top">
+      <div>
+        <p class="eyebrow">{project.eyebrow}</p>
+      </div>
+      <span class="project-card__arrow"><Icon name="arrow" /></span>
+    </div>
+    <div class="project-card__signal" aria-hidden="true">
+      <span></span><span></span><span></span><i></i>
+      <small>{project.signal}</small>
+    </div>
+    <h3>{project.title}</h3>
+    <p>{project.summary}</p>
+    <ul class="tag-list" aria-label="Technologies and themes">
+      {project.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <div class="project-card__status"><i></i>{project.status}</div>
+  </a>
+</article>

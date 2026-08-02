@@ -1,0 +1,169 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { publicProfiles, siteConfig } from "../data/site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = "/og.png",
+  type = "website",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, siteConfig.url);
+const socialImage = new URL(image, siteConfig.url);
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  jobTitle: "Software Engineer, Quality Engineering and Development",
+  sameAs: publicProfiles,
+  knowsAbout: [
+    "Quality engineering",
+    "Test automation",
+    "Software development",
+    "CI/CD",
+    "Developer productivity",
+    "Applied artificial intelligence",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#071014" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta
+      property="og:image:alt"
+      content="Sergii Khomenko. Quality Engineering, Automation, Applied AI"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(personSchema)}
+    />
+    {/* Set before paint so reveal targets never flash in, then out. */}
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      /**
+       * Groups of elements that should rise into view together, each item
+       * staggered slightly after the one before it.
+       */
+      // The hero is deliberately absent: it animates from CSS on load so the
+      // first paint never waits on this script.
+      const GROUPS = [
+        ".section-heading",
+        ".capability",
+        ".project-card",
+        ".ai-intro__note, .ai-workflow__item",
+        ".principle",
+        ".timeline",
+        ".timeline__item",
+        ".toolbox-group",
+        ".contact",
+        ".case-content > *",
+        ".resume-panel",
+      ];
+
+      const setUp = () => {
+        if (reduced.matches) return;
+
+        // Never let a missing API leave the page invisible.
+        if (!("IntersectionObserver" in window)) {
+          for (const selector of GROUPS) {
+            document
+              .querySelectorAll(selector)
+              .forEach((node) => node.classList.add("is-visible"));
+          }
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+        );
+
+        for (const selector of GROUPS) {
+          const nodes = document.querySelectorAll<HTMLElement>(selector);
+          nodes.forEach((node, index) => {
+            node.dataset.reveal = "";
+            // Cap the stagger so long lists don't crawl in.
+            node.style.setProperty(
+              "--reveal-delay",
+              `${Math.min(index, 6) * 70}ms`,
+            );
+            observer.observe(node);
+          });
+        }
+      };
+
+      /** Pointer-tracked glow on the project cards. */
+      const trackPointer = () => {
+        if (reduced.matches) return;
+        if (!window.matchMedia("(hover: hover)").matches) return;
+
+        document
+          .querySelectorAll<HTMLElement>(".project-card__link")
+          .forEach((card) => {
+            card.addEventListener("pointermove", (event) => {
+              const rect = card.getBoundingClientRect();
+              card.style.setProperty(
+                "--pointer-x",
+                `${((event.clientX - rect.left) / rect.width) * 100}%`,
+              );
+              card.style.setProperty(
+                "--pointer-y",
+                `${((event.clientY - rect.top) / rect.height) * 100}%`,
+              );
+            });
+          });
+      };
+
+      setUp();
+      trackPointer();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+---
+import Contact from "../components/Contact.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { profile } from "../data/profile";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About Sergii Khomenko | Quality Engineering & Software Development"
+  description="How Sergii Khomenko approaches quality engineering, automation architecture, software development, technical leadership, and applied AI."
+>
+  <header class="page-hero shell">
+    <div class="page-hero__grid">
+      <div>
+        <p class="eyebrow">About</p>
+        <h1>I like the problems that start out badly defined.</h1>
+      </div>
+      <p class="page-hero__summary">{profile.positioning}</p>
+    </div>
+  </header>
+
+  <section class="section shell section--flush-top">
+    <SectionHeading
+      eyebrow="How I work"
+      title="Wide view, hands still on the code."
+      align="left"
+    />
+    <div class="about-grid">
+      <div class="about-copy">
+        {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <aside class="about-aside">
+        <div class="about-aside__item">
+          <strong>Ownership</strong>
+          <p>
+            I stay with a problem from the fuzzy start through to something
+            someone else can maintain.
+          </p>
+        </div>
+        <div class="about-aside__item">
+          <strong>Whole system</strong>
+          <p>
+            Product risk, code, infrastructure, and feedback are one picture. I
+            try to keep all of it in view.
+          </p>
+        </div>
+        <div class="about-aside__item">
+          <strong>Judgment</strong>
+          <p>
+            Decisions come from evidence and constraints, including the awkward
+            operational ones.
+          </p>
+        </div>
+        <div class="about-aside__item">
+          <strong>Curiosity</strong>
+          <p>
+            I experiment on purpose, report the result honestly, and keep what
+            earns its place.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+  <Contact />
+</BaseLayout>
