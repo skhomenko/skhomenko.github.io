@@ -142,34 +142,6 @@ The workflow follows Astro's current
 [GitHub Pages guidance](https://docs.astro.build/en/guides/deploy/github/) and
 uses the framework-maintained build action.
 
-## Repository rename
-
-The site is configured for a user site at `https://skhomenko.github.io`, so
-`astro.config.ts` intentionally has no `/about-me/` base path.
-
-Before production deployment:
-
-1. Rename the GitHub repository from `about-me` to `skhomenko.github.io`.
-2. Confirm the repository owner is `skhomenko`.
-3. Confirm `src/data/site.ts` still uses `https://skhomenko.github.io`.
-4. Enable GitHub Actions as the Pages source.
-
-Deploying this configuration from a project repository named `about-me` will
-not create a working `/about-me/` site because root-path deployment is the
-explicit production target.
-
-## Future custom domain
-
-To use a custom domain later:
-
-1. Change `siteConfig.url` in `src/data/site.ts`.
-2. Add the domain in GitHub **Settings → Pages**.
-3. Add `public/CNAME` containing only the domain.
-4. Update DNS using GitHub's current custom-domain documentation.
-5. Update the sitemap URL in `public/robots.txt`.
-
-Keep the site at the root path; no Astro `base` value is required.
-
 ## Accessibility
 
 - Semantic page landmarks and heading hierarchy
@@ -196,14 +168,3 @@ social-sharing image is not used in visible page layout.
 - Content schema: `src/content.config.ts`
 - Design tokens: top of `src/styles/global.css`
 - Deployment: `.github/workflows/deploy.yml`
-
-## Content TODOs before launch
-
-- Replace `hello@example.com` with Sergii's public professional email.
-- Replace the LinkedIn placeholder with the exact public profile URL.
-- Add the updated sanitized résumé PDF.
-- Verify employer dates and locations from the new public résumé before adding
-  them.
-- Add only validated metrics; do not invent impact percentages or scale.
-- Review the wording of current independent engineering and applied AI work.
-- Confirm the Test Automation Reporting Platform's public completion status.
