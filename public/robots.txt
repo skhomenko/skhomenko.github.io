@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://skhomenko.github.io/sitemap.xml
+Sitemap: https://skhomenko.github.io/pytest-graphql/sitemap.xml

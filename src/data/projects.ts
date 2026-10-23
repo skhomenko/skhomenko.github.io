@@ -10,6 +10,16 @@ export type Project = {
 
 export const projects: readonly Project[] = [
   {
+    slug: "pytest-graphql",
+    title: "pytest-graphql",
+    eyebrow: "Open source test library",
+    summary:
+      "A GraphQL test client for Python. Calls are built from the schema and checked against it before they are sent.",
+    tags: ["Python", "pytest", "GraphQL", "httpx", "PyPI"],
+    status: "Released on PyPI · 0.x",
+    signal: "Schema → checked call → readable failure",
+  },
+  {
     slug: "booking-scheduling-platform",
     title: "Booking & Scheduling Platform",
     eyebrow: "Product engineering",

@@ -3,7 +3,7 @@ title: Bilingual Document Assistant
 eyebrow: Applied AI demonstrator
 summary: A retrieval-augmented assistant that answers questions in French or English about a long French agreement, and cites the article it used.
 description: A working demonstrator in RAG architecture, local LLM inference, pgvector retrieval, cross-language search with multilingual embeddings, and answers traceable to source text.
-order: 2
+order: 3
 status: ongoing
 role: Designer and developer of the demonstrator
 collaboration: Built as a demonstrator; production use would need domain validation and a security review

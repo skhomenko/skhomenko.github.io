@@ -1,6 +1,7 @@
 ---
 interface Props {
-  type: "reporting" | "enterprise" | "api" | "scheduling" | "assistant";
+  type:
+    "reporting" | "enterprise" | "api" | "scheduling" | "assistant" | "library";
 }
 
 const { type } = Astro.props;
@@ -36,6 +37,12 @@ const diagrams = {
     ["answer", "Local model", "Grounded in what was retrieved"],
     ["cite", "Source articles", "Every claim traceable"],
   ],
+  library: [
+    ["read", "GraphQL schema", "Introspection or a file"],
+    ["build", "Client", "Fields chosen from the schema"],
+    ["check", "Validation", "Wrong names fail before sending"],
+    ["report", "Test failure", "Calls listed, curl line included"],
+  ],
 } as const;
 
 /** Read out as the list's accessible name, so `type` never reaches a user. */
@@ -45,6 +52,7 @@ const names = {
   api: "API automation",
   scheduling: "Booking and scheduling platform",
   assistant: "Bilingual document assistant",
+  library: "pytest-graphql",
 } as const;
 ---
 
