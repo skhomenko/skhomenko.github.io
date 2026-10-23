@@ -4,7 +4,7 @@ import { siteConfig } from "./src/data/site";
 
 export default defineConfig({
   site: siteConfig.url,
-  trailingSlash: "never",
+  trailingSlash: "always",
   build: {
     format: "directory",
   },
