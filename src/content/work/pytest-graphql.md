@@ -52,7 +52,7 @@ Python 3.10 through 3.14. The required dependencies are `graphql-core`, `httpx` 
 
 ## Status
 
-Released on PyPI. It is a 0.x library, so the API may change between minor versions, and the changelog records every change.
+Released on PyPI.
 
 ## Links
 
