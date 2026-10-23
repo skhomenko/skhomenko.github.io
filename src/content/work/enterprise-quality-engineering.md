@@ -3,7 +3,7 @@ title: Enterprise Quality Engineering
 eyebrow: Sanitized enterprise case study
 summary: Multi-product automation architecture, cloud test infrastructure, CI reliability, and technical leadership at Lightspeed.
 description: A sanitized case study in enterprise automation architecture, cloud-based testing, CI/CD stability, developer enablement, and technical leadership.
-order: 4
+order: 5
 status: sanitized
 role: Staff Quality Test Developer and quality engineering leader
 collaboration: Cross-functional work with quality, development, product, and platform teams

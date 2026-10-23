@@ -3,7 +3,7 @@ title: Booking & Scheduling Platform
 eyebrow: Product engineering
 summary: A Go and React scheduling product, from the booking lifecycle down to the deploy pipeline.
 description: A case study in Go service design, React and TypeScript frontend work, PostgreSQL, booking conflict prevention, OAuth, rate limiting, and single-operator deployment.
-order: 1
+order: 2
 status: ongoing
 role: Designer and developer of the whole system
 collaboration: Built solo, with architecture decisions written down as they were made

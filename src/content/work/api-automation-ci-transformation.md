@@ -3,7 +3,7 @@ title: API Automation & CI Transformation
 eyebrow: Quality practice transformation
 summary: Building an API automation framework and moving regression feedback into CI at X2O Media.
 description: A case study in API automation, CI integration, regression strategy, risk analysis, team coaching, and cross-platform quality engineering.
-order: 5
+order: 6
 status: completed
 role: QA Technical Lead; framework designer and team coach
 collaboration: Work with development, product, research, and quality engineers

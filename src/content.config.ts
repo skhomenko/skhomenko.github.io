@@ -20,6 +20,7 @@ const work = defineCollection({
       "api",
       "scheduling",
       "assistant",
+      "library",
     ]),
   }),
 });

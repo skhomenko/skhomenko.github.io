@@ -3,7 +3,7 @@ title: Test Automation Reporting Platform
 eyebrow: Developer productivity platform
 summary: A service that turns scattered CI test runs into one queryable record an engineer can read.
 description: A case study in Go, PostgreSQL, PyTest, REST APIs, CI integration, Docker, and test-run reporting that people actually use.
-order: 3
+order: 4
 status: ongoing
 role: Designer and developer of the platform
 collaboration: Built to support developers, quality engineers, and CI workflows
