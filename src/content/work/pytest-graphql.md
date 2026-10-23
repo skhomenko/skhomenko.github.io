@@ -52,7 +52,7 @@ Python 3.10 through 3.14. The required dependencies are `graphql-core`, `httpx` 
 
 ## Status
 
-Released on PyPI. The latest version is 0.6.0. It is a 0.x library, so the API may change between minor versions, and the changelog records every change. An on-disk schema cache, async clients and subscriptions are not part of 0.6.x.
+Released on PyPI. It is a 0.x library, so the API may change between minor versions, and the changelog records every change.
 
 ## Links
 
