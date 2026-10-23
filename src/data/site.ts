@@ -38,7 +38,7 @@ export const publicProfiles: string[] = [
  */
 export const navigation = [
   { label: "Expertise", href: "/#expertise", spy: "expertise" },
-  { label: "Work", href: "/work", spy: "work" },
+  { label: "Work", href: "/work/", spy: "work" },
   { label: "Approach", href: "/#approach", spy: "approach" },
-  { label: "About", href: "/about", spy: null },
+  { label: "About", href: "/about/", spy: null },
 ] as const;

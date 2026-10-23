@@ -18,7 +18,7 @@ const title = `${entry.data.title} | Sergii Khomenko`;
   <nav class="breadcrumb shell" aria-label="Breadcrumb">
     <ol>
       <li><a href="/">Home</a></li>
-      <li><a href="/work">Work</a></li>
+      <li><a href="/work/">Work</a></li>
       <li aria-current="page">{entry.data.title}</li>
     </ol>
   </nav>
@@ -72,7 +72,7 @@ const title = `${entry.data.title} | Sergii Khomenko`;
     next && (
       <aside class="case-next shell">
         <p class="eyebrow">Next case study</p>
-        <a href={`/work/${next.id}`}>
+        <a href={`/work/${next.id}/`}>
           <h3>{next.data.title}</h3>
           <Icon name="arrow" />
         </a>

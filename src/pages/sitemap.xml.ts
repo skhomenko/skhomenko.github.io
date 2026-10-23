@@ -5,10 +5,10 @@ import { siteConfig } from "../data/site";
 export const GET: APIRoute = () => {
   const paths = [
     "/",
-    "/work",
-    "/about",
-    "/resume",
-    ...projects.map((p) => `/work/${p.slug}`),
+    "/work/",
+    "/about/",
+    "/resume/",
+    ...projects.map((p) => `/work/${p.slug}/`),
   ];
   const urls = paths
     .map(
